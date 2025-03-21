@@ -9,7 +9,7 @@ class EnterCityView extends StatelessWidget {
     return const SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        backgroundColor: kBGColor,
+       // backgroundColor: kBGColor,
         body: EnterCityViewBody(),
       ),
     );
