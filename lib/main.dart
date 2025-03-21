@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_status_app/core/utils/globals.dart' as globals;
-
 import 'core/utils/colors.dart';
 import 'features/WeatherStatus/presentation/views/enter_city_view.dart';
 
