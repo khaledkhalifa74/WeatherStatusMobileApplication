@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_status_app/core/utils/colors.dart';
 import 'package:weather_status_app/core/utils/styles.dart';
+import 'package:weather_status_app/core/widgets/custom_app_bar.dart';
 import 'package:weather_status_app/features/WeatherStatus/data/models/weather_model.dart';
 import 'package:weather_status_app/features/WeatherStatus/presentation/manager/weather_status_cubit.dart';
 import 'package:weather_status_app/features/WeatherStatus/presentation/manager/weather_status_states.dart';
-import 'package:weather_status_app/core/utils/globals.dart' as globals;
+import 'package:weather_status_app/features/WeatherStatus/presentation/views/widgets/location_item.dart';
+import 'package:weather_status_app/features/WeatherStatus/presentation/views/widgets/status_item.dart';
 
 class ShowWeatherStatusViewBody extends StatefulWidget {
   final WeatherModel weatherModel;
   final WeatherStatusCubit weatherStatusCubit;
   const ShowWeatherStatusViewBody({super.key, required this.weatherModel, required this.weatherStatusCubit});
+
 
   @override
   State<ShowWeatherStatusViewBody> createState() => _ShowWeatherStatusViewBodyState();
@@ -36,20 +39,48 @@ class _ShowWeatherStatusViewBodyState extends State<ShowWeatherStatusViewBody> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
             child: Column(
               children: [
+                Align(
+                  alignment: AlignmentDirectional.topStart,
+                  child: CustomAppBar(),
+                ),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.network("https:${widget.weatherModel.image!}",width: 100),
-                        Text(
-                          widget.weatherModel.temp.toString(),
-                          style: Styles.textStyle24,
+                        SizedBox(
+                          height: MediaQuery.sizeOf(context).height * .15,
+                        ),
+                        LocationItem(
+                            cityName: widget.weatherModel.cityName,
                         ),
                         Text(
-                          widget.weatherModel.weatherCondition,
-                          style: Styles.textStyle24,
+                          '${widget.weatherModel.temp.toString()}°',
+                          style: Styles.textStyle80,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              widget.weatherModel.weatherCondition,
+                              style: Styles.textStyle20,
+                            ),
+                            Image.network("https:${widget.weatherModel.image!}"),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            StatusItem(
+                                statusName: 'Wind speed',
+                                statusValue: widget.weatherModel.windSpeed.toString(),
+                            ),
+                            const SizedBox(width: 24),
+                            StatusItem(
+                              statusName: 'Humidity',
+                              statusValue: widget.weatherModel.humidity.toString(),
+                            ),
+                          ],
                         ),
                       ],
                     ),

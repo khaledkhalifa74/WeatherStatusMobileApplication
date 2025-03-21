@@ -103,6 +103,7 @@ class _EnterCityViewBodyState extends State<EnterCityViewBody> {
                     text: 'Search',
                     itemCallBack: () {
                       if (_enterCityFormKey.currentState!.validate()){
+                        FocusScope.of(context).unfocus();
                         weatherStatusCubit.getWeatherStatus(cityName: cityController.text);
                       }
                     },
