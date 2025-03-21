@@ -11,6 +11,7 @@ import 'package:weather_status_app/core/widgets/text_form_field_with_title.dart'
 import 'package:weather_status_app/features/WeatherStatus/presentation/manager/weather_status_cubit.dart';
 import 'package:weather_status_app/features/WeatherStatus/presentation/manager/weather_status_states.dart';
 import 'package:weather_status_app/core/utils/globals.dart' as globals;
+import 'package:weather_status_app/features/WeatherStatus/presentation/views/show_weather_status_view.dart';
 
 class EnterCityViewBody extends StatefulWidget {
   const EnterCityViewBody({super.key});
@@ -31,6 +32,7 @@ class _EnterCityViewBodyState extends State<EnterCityViewBody> {
   }
   @override
   Widget build(BuildContext context) {
+    final weatherStatusCubit = WeatherStatusCubit.get(context);
     return BlocConsumer<WeatherStatusCubit,WeatherStatusStates>(
       listener: (context, state) {
         if(state is StartLoadingGetWeatherState){
@@ -40,18 +42,20 @@ class _EnterCityViewBodyState extends State<EnterCityViewBody> {
         }
 
         if(state is GetWeatherSuccessState){
-          globals.navigatorKey.currentState!.pushNamed(ShowWeatherStatusView.id);
+          globals.navigatorKey.currentState!.pushNamed(ShowWeatherStatusView.id,arguments: {
+            'weatherStatusCubit' : weatherStatusCubit,
+            'weatherModel': weatherStatusCubit.weatherModel
+          });
         }else if (state is GetWeatherFailureState){
           customAlert(
               context,
               title: 'Sorry',
-              message: 'Something went wrong, please try later',
+              message: state.errorMessage,
               isError: true,
           );
         }
       },
       builder: (context, state) {
-        final weatherStatusCubit = WeatherStatusCubit.get(context);
         return Container(
           height: double.infinity,
           width: double.infinity,

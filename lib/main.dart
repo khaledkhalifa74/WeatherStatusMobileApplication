@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_status_app/core/utils/globals.dart' as globals;
 import 'core/utils/colors.dart';
 import 'features/WeatherStatus/presentation/views/enter_city_view.dart';
+import 'features/WeatherStatus/presentation/views/show_weather_status_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,14 +35,13 @@ class MyApp extends StatelessWidget {
         locale: Locale('en'),
         title: 'Weather Status',
         theme: ThemeData(
-         // colorScheme: const ColorScheme.light(primary: kPrimaryColor),
           useMaterial3: true,
-        //  primaryColor: kPrimaryColor,
         ),
         navigatorKey: globals.navigatorKey,
         initialRoute: EnterCityView.id,
         routes: {
           EnterCityView.id: (context) => const EnterCityView(),
+          ShowWeatherStatusView.id: (context) => const ShowWeatherStatusView(),
         },
       ),
     );

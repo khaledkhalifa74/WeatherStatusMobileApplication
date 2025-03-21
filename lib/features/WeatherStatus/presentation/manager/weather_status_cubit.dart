@@ -20,7 +20,7 @@ class WeatherStatusCubit extends Cubit<WeatherStatusStates> {
         emit(GetWeatherSuccessState(weatherModel!));
       }
     } catch (e) {
-      emit(GetWeatherFailureState());
+      emit(GetWeatherFailureState(errorMessage: e.toString()));
       emit(StopLoadingGetWeatherState());
     }
   }

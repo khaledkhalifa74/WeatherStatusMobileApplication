@@ -14,4 +14,7 @@ class GetWeatherSuccessState extends WeatherStatusStates {
   final WeatherModel weatherModel;
   GetWeatherSuccessState(this.weatherModel);
 }
-class GetWeatherFailureState extends WeatherStatusStates {}
+class GetWeatherFailureState extends WeatherStatusStates {
+  final String errorMessage;
+  GetWeatherFailureState({required this.errorMessage});
+}
