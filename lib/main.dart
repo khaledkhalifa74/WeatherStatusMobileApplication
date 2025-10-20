@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:weather_status_app/core/utils/globals.dart' as globals;
+import 'package:weather_status_app/core/utils/app_router.dart';
+import 'package:weather_status_app/core/utils/functions/setup_service_locator.dart';
+import 'package:weather_status_app/core/utils/simple_bloc_observer.dart';
 import 'core/utils/colors.dart';
-import 'features/WeatherStatus/presentation/views/enter_city_view.dart';
-import 'features/WeatherStatus/presentation/views/show_weather_status_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = SimpleBlocObserver();
+  setupServiceLocator();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
 
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: kBGColor,
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.light,
-    systemNavigationBarColor: kBG2Color,
+    systemNavigationBarColor: kWhiteColor,
     systemNavigationBarIconBrightness: Brightness.light,
   ));
 
@@ -25,25 +28,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(360, 690),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        supportedLocales: const [Locale('en')],
-        locale: Locale('en'),
-        title: 'Weather Status',
-        theme: ThemeData(
-          useMaterial3: true,
-        ),
-        navigatorKey: globals.navigatorKey,
-        initialRoute: EnterCityView.id,
-        routes: {
-          EnterCityView.id: (context) => const EnterCityView(),
-          ShowWeatherStatusView.id: (context) => const ShowWeatherStatusView(),
-        },
-      ),
+    return MaterialApp.router(
+      routerConfig: AppRouter.router,
+      debugShowCheckedModeBanner: false,
+      builder: (context, child){
+        return ScreenUtilInit(
+          designSize: const Size(360, 690),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            supportedLocales: const [Locale('en')],
+            locale: Locale('en'),
+            title: 'Weather Status',
+            theme: ThemeData(
+              useMaterial3: true,
+            ),
+          ),
+        );
+      },
     );
   }
 }

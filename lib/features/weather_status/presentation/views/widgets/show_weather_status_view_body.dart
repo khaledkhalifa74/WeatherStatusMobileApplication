@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_status_app/core/utils/colors.dart';
 import 'package:weather_status_app/core/utils/styles.dart';
 import 'package:weather_status_app/core/widgets/custom_app_bar.dart';
-import 'package:weather_status_app/features/WeatherStatus/data/models/weather_model.dart';
-import 'package:weather_status_app/features/WeatherStatus/presentation/manager/weather_status_cubit.dart';
-import 'package:weather_status_app/features/WeatherStatus/presentation/manager/weather_status_states.dart';
-import 'package:weather_status_app/features/WeatherStatus/presentation/views/widgets/location_item.dart';
-import 'package:weather_status_app/features/WeatherStatus/presentation/views/widgets/status_item.dart';
+import 'package:weather_status_app/features/weather_status/data/models/weather_model.dart';
+import 'package:weather_status_app/features/weather_status/presentation/manager/weather_status_cubit.dart';
+import 'package:weather_status_app/features/weather_status/presentation/manager/weather_status_states.dart';
+import 'package:weather_status_app/features/weather_status/presentation/views/widgets/location_item.dart';
+import 'package:weather_status_app/features/weather_status/presentation/views/widgets/status_item.dart';
 
 class ShowWeatherStatusViewBody extends StatefulWidget {
   final WeatherModel weatherModel;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_status_app/core/utils/globals.dart' as globals;
+import 'package:go_router/go_router.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
@@ -10,7 +10,7 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: (){
-        globals.navigatorKey.currentState!.pop();
+        context.pop();
       },
       icon: Icon(
         Icons.arrow_back_rounded,
