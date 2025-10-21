@@ -6,8 +6,8 @@ import 'package:weather_status_app/features/weather_status/presentation/manager/
 import 'package:weather_status_app/features/weather_status/presentation/views/widgets/show_weather_status_view_body.dart';
 
 class ShowWeatherStatusView extends StatelessWidget {
-  final String? cityName;
-  const ShowWeatherStatusView({super.key, this.cityName});
+  final String cityName;
+  const ShowWeatherStatusView({super.key, required this.cityName});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -19,7 +19,7 @@ class ShowWeatherStatusView extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         body: ShowWeatherStatusViewBody(
-          cityName: cityName ?? '',
+          cityName: cityName,
         ),
       ),
     );
