@@ -13,6 +13,7 @@ const kErrorColor = Colors.red;
 const kWarningColor = Color(0xFFfeb700);
 const kSuccessColor = Color(0xFF00c870);
 const kHintColor = Colors.white60;
+const kIconColor = Colors.white70;
 const kRedColor = Colors.red;
 const kFirstGradientFavorite = Color(0x26FFFFFF);
 const kSecondGradientFavorite = Color(0x0DFFFFFF);

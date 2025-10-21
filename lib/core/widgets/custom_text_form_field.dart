@@ -110,7 +110,7 @@ class CustomTextFormFieldState extends State<CustomTextFormField> {
             validator: widget.validator ??
                     (data) {
                   if (data!.isEmpty) {
-                    return 'this filed cannot be empty';
+                    return 'This field can not be empty';
                   } else {
                     return null;
                   }

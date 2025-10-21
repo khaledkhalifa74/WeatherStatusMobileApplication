@@ -61,4 +61,10 @@ abstract class Styles {
     fontWeight: FontWeight.w600,
     color: kWhiteColor,
   );
+
+  static TextStyle textStyle60 = TextStyle(
+    fontSize: 60.spMin,
+    fontWeight: FontWeight.w600,
+    color: kWhiteColor,
+  );
 }
