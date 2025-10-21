@@ -8,6 +8,7 @@ class WeatherStatusCubit extends Cubit<WeatherStatusState> {
   static WeatherStatusCubit get(context) => BlocProvider.of(context);
   final GetWeatherStatusRepo getWeatherStatusRepo;
 
+  bool isFavorite = false;
   Future<void> getWeatherStatus({ required String cityName}) async{
     emit(StartLoadingGetWeatherState());
     var result = await getWeatherStatusRepo.getWeatherStatus(cityName: cityName);
@@ -39,22 +40,25 @@ class WeatherStatusCubit extends Cubit<WeatherStatusState> {
     var result = await getWeatherStatusRepo.addCityToFavorites(cityName: cityName);
     result.fold((failure) {
       emit(AddCityToFavoriteFailureState(errorMessage: failure.message));
+      isFavorite = false;
       },
           (isAdded) {
-        isAdded = !isAdded;
+        isFavorite = isAdded;
         emit(AddCityToFavoriteSuccessState(isAdded));
       },
     );
     emit(StopLoadingAddCityToFavoriteState());
   }
 
-  Future<void> isFavorite({required String cityName}) async{
+  Future<void> isFavoriteCity({required String cityName}) async{
     emit(StartLoadingCheckIsFavoriteState());
     var result = await getWeatherStatusRepo.isFavorite(cityName: cityName);
     result.fold((failure) {
       emit(CheckIsFavoriteFailureState(errorMessage: failure.message));
+      isFavorite = false;
     },
-          (isFavorite) {
+          (isFavoriteCity) {
+            isFavorite = isFavoriteCity;
         emit(CheckIsFavoriteSuccessState(isFavorite));
       },
     );
@@ -63,6 +67,6 @@ class WeatherStatusCubit extends Cubit<WeatherStatusState> {
 
   Future<void> getData({required String cityName})async{
     await getWeatherStatus(cityName: cityName);
-    await isFavorite(cityName: cityName);
+    await isFavoriteCity(cityName: cityName);
   }
 }

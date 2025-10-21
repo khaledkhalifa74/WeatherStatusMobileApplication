@@ -21,7 +21,6 @@ class ShowWeatherStatusViewBody extends StatefulWidget {
 }
 
 class _ShowWeatherStatusViewBodyState extends State<ShowWeatherStatusViewBody> {
-  bool isFavorite = false;
   bool isLoading = false;
   WeatherModel? weatherModel;
 
@@ -40,14 +39,6 @@ class _ShowWeatherStatusViewBodyState extends State<ShowWeatherStatusViewBody> {
         }else if (state is StopLoadingCheckIsFavoriteState){
           isLoading = false;
         }
-
-        if(state is CheckIsFavoriteSuccessState){
-          isFavorite = state.isFavorite;
-        }
-        if(state is AddCityToFavoriteSuccessState){
-          isFavorite = state.isAdded;
-        }
-        isFavorite = false;
         return Skeletonizer(
           textBoneBorderRadius: TextBoneBorderRadius(BorderRadius.circular(4)),
           enabled: isLoading,
@@ -68,7 +59,7 @@ class _ShowWeatherStatusViewBodyState extends State<ShowWeatherStatusViewBody> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomWeatherHeader(
-                      isFavorite: isFavorite,
+                      isFavorite: cubit.isFavorite,
                       onFavoritePressed: (){
                         cubit.addCityToFavorites(cityName: widget.cityName);
                       },
