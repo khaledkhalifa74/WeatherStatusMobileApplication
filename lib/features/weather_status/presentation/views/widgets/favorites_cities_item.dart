@@ -42,7 +42,14 @@ class FavoritesCitiesItem extends StatelessWidget {
               itemBuilder: (context, index) {
                 return FavoriteCityItem(
                     cityName: favoriteCities[index],
-                  onTap: (){},
+                  onTap: (){
+                    // context.push(
+                    //     AppRouter.kShowStatusView,
+                    //     extra: {
+                    //       'cityName' : _searchController.text,
+                    //     }
+                    // );
+                  },
                 );
               },
             ),

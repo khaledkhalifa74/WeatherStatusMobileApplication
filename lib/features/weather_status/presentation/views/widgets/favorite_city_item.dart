@@ -38,7 +38,7 @@
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: kBlueColor,
+                      color: kFilledColor,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Icon(Icons.cloud, color: kWhiteColor, size: 28),

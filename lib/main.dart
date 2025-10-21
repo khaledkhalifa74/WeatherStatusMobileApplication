@@ -3,17 +3,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:weather_status_app/core/utils/app_router.dart';
 import 'package:weather_status_app/core/utils/functions/setup_service_locator.dart';
 import 'package:weather_status_app/core/utils/simple_bloc_observer.dart';
 import 'core/utils/colors.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await Hive.openBox('favoritesBox');
   Bloc.observer = SimpleBlocObserver();
   setupServiceLocator();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
-
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.light,
@@ -42,7 +44,10 @@ class MyApp extends StatelessWidget {
           title: 'Weather Status',
           theme: ThemeData.dark().copyWith(
             scaffoldBackgroundColor: kSecondGradientBodyColor,
-            //scaffoldBackgroundColor: kPrimaryColor,
+            primaryColor: kPrimaryColor,
+            textSelectionTheme: TextSelectionThemeData(
+              selectionHandleColor: kFilledColor,
+            ),
             textTheme: GoogleFonts.merriweatherSansTextTheme(ThemeData.dark().textTheme),
           ),
         );

@@ -13,10 +13,11 @@ class DaysForecast extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
+      child: weatherModel!.forecast.isEmpty
+          ? const SizedBox()
+          : Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 5-Day Forecast
            Text(
             'Days Forecast',
             style: Styles.textStyle24,

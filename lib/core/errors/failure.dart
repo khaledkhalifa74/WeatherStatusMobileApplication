@@ -46,6 +46,9 @@ class ServerFailure extends Failure{
 class CacheFailure extends Failure{
   CacheFailure({required super.message});
 }
+class LocalDBFailure extends Failure{
+  LocalDBFailure({required super.message});
+}
 
 class NetworkFailure extends Failure{
   NetworkFailure({required super.message});
