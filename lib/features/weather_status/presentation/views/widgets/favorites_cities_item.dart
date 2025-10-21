@@ -40,7 +40,10 @@ class FavoritesCitiesItem extends StatelessWidget {
               padding: EdgeInsets.zero,
               itemCount: favoriteCities.length,
               itemBuilder: (context, index) {
-                return FavoriteCityItem(cityName: favoriteCities[index]);
+                return FavoriteCityItem(
+                    cityName: favoriteCities[index],
+                  onTap: (){},
+                );
               },
             ),
           ),
