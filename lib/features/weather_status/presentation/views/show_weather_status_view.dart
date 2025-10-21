@@ -6,21 +6,20 @@ import 'package:weather_status_app/features/weather_status/presentation/manager/
 import 'package:weather_status_app/features/weather_status/presentation/views/widgets/show_weather_status_view_body.dart';
 
 class ShowWeatherStatusView extends StatelessWidget {
-  const ShowWeatherStatusView({super.key});
+  final String? cityName;
+  const ShowWeatherStatusView({super.key, this.cityName});
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic>? args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
-    final String? cityName = args?['cityName'];
     return BlocProvider(
       create: (BuildContext context) {
         return WeatherStatusCubit(getIt.get<GetWeatherStatusRepoImpl>())..getWeatherStatus(
-          cityName:  cityName,
+          cityName: cityName,
         );
       },
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         body: ShowWeatherStatusViewBody(
-          cityName: cityName ?? 'cairo',
+          cityName: cityName ?? '',
         ),
       ),
     );

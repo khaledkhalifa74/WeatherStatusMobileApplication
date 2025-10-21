@@ -15,7 +15,12 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kShowStatusView,
-        builder: (context, state) => const ShowWeatherStatusView(),
+        builder: (context, state) {
+          final args = state.extra as Map<String, dynamic>?;
+          final cityName = args?['cityName'] ?? '';
+
+          return ShowWeatherStatusView(cityName: cityName);
+        },
       ),
     ],
   );

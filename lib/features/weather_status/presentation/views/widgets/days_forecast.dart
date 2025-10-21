@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:weather_status_app/core/utils/styles.dart';
+import 'package:weather_status_app/features/weather_status/data/models/weather_model.dart';
 import 'package:weather_status_app/features/weather_status/presentation/views/widgets/day_forecast_item.dart';
 
 class DaysForecast extends StatelessWidget {
-  const DaysForecast({super.key});
+  final WeatherModel? weatherModel;
+  const DaysForecast({super.key, this.weatherModel});
 
   @override
   Widget build(BuildContext context) {

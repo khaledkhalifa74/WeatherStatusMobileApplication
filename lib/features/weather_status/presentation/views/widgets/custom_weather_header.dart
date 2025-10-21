@@ -24,22 +24,6 @@ class CustomWeatherHeader extends StatelessWidget {
             size: 28,
           ),
           onPressed: onFavoritePressed
-          //     () {
-          //   setState(() {
-          //     widget.isFavorite = !widget.isFavorite;
-          //   });
-          //   ScaffoldMessenger.of(context).showSnackBar(
-          //     SnackBar(
-          //       content: Text(
-          //         isFavorite
-          //             ? '${cityName} added to favorites'
-          //             : '${cityName} removed from favorites',
-          //       ),
-          //       duration: const Duration(seconds: 2),
-          //       backgroundColor: Colors.white.withOpacity(0.2),
-          //     ),
-          //   );
-          // },
         ),
       ],
     );

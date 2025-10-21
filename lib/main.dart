@@ -41,7 +41,8 @@ class MyApp extends StatelessWidget {
           locale: Locale('en'),
           title: 'Weather Status',
           theme: ThemeData.dark().copyWith(
-            scaffoldBackgroundColor: kPrimaryColor,
+            scaffoldBackgroundColor: kSecondGradientBodyColor,
+            //scaffoldBackgroundColor: kPrimaryColor,
             textTheme: GoogleFonts.merriweatherSansTextTheme(ThemeData.dark().textTheme),
           ),
         );

@@ -13,7 +13,15 @@ class WeatherStatusRemoteDataSourceImpl extends WeatherStatusRemoteDataSource{
   @override
   Future<WeatherModel> getWeatherStatus({String? cityName}) async{
     var response = await apiService.get(
-        endPoint: '/forecast.json?key=${apiService.apiKey}&q=$cityName&days=1&aqi=no&alerts=no');
+        endPoint: '/forecast.json',
+        queryParameters: {
+        'key': apiService.apiKey,
+        'q': cityName,
+        'days': '5',
+        'aqi': 'no',
+        'alerts': 'no',
+      },
+    );
     WeatherModel weatherModel = WeatherModel.fromJson(response);
     return weatherModel;
   }

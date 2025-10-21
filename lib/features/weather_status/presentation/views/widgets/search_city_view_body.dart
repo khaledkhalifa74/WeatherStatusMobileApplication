@@ -17,7 +17,6 @@ class SearchCityViewBody extends StatefulWidget {
 class _SearchCityViewBodyState extends State<SearchCityViewBody> {
   final TextEditingController _searchController = TextEditingController();
   final GlobalKey<FormState> _searchFormKey = GlobalKey<FormState>();
-  bool isLoading = false;
   @override
   void dispose() {
     _searchController.dispose();
@@ -42,14 +41,14 @@ class _SearchCityViewBodyState extends State<SearchCityViewBody> {
                 controller: _searchController,
                 placeholder: 'Search city...',
                 onFieldSubmitted: (value) {
-                  // if (value.isNotEmpty) {
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => WeatherDetailPage(cityName: value),
-                  //     ),
-                  //   );
-                  // }
+                  if(_searchFormKey.currentState!.validate()){
+                    context.push(
+                        AppRouter.kShowStatusView,
+                        extra: {
+                          'cityName' : _searchController.text,
+                        }
+                    );
+                  }
                 },
                 suffix: IconButton(
                   icon: const Icon(
@@ -58,7 +57,12 @@ class _SearchCityViewBodyState extends State<SearchCityViewBody> {
                   ),
                   onPressed: () {
                     if(_searchFormKey.currentState!.validate()){
-                      context.push(AppRouter.kShowStatusView);
+                      context.push(
+                          AppRouter.kShowStatusView,
+                        extra: {
+                            'cityName' : _searchController.text,
+                        }
+                      );
                     }
                   },
                 ),
