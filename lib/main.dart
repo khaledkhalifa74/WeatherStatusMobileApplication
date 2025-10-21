@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_status_app/core/utils/app_router.dart';
 import 'package:weather_status_app/core/utils/functions/setup_service_locator.dart';
 import 'package:weather_status_app/core/utils/simple_bloc_observer.dart';
@@ -16,7 +17,7 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.light,
-    systemNavigationBarColor: kWhiteColor,
+    systemNavigationBarColor: Colors.transparent,
     systemNavigationBarIconBrightness: Brightness.light,
   ));
 
@@ -28,22 +29,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: AppRouter.router,
-      debugShowCheckedModeBanner: false,
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
       builder: (context, child){
-        return ScreenUtilInit(
-          designSize: const Size(360, 690),
-          minTextAdapt: true,
-          splitScreenMode: true,
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            supportedLocales: const [Locale('en')],
-            locale: Locale('en'),
-            title: 'Weather Status',
-            theme: ThemeData(
-              useMaterial3: true,
-            ),
+        return MaterialApp.router(
+          routerConfig: AppRouter.router,
+          debugShowCheckedModeBanner: false,
+          supportedLocales: const [Locale('en')],
+          locale: Locale('en'),
+          title: 'Weather Status',
+          theme: ThemeData.dark().copyWith(
+            scaffoldBackgroundColor: kPrimaryColor,
+            textTheme: GoogleFonts.merriweatherSansTextTheme(ThemeData.dark().textTheme),
           ),
         );
       },

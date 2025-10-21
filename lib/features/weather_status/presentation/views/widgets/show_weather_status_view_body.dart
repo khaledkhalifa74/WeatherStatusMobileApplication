@@ -29,11 +29,11 @@ class _ShowWeatherStatusViewBodyState extends State<ShowWeatherStatusViewBody> {
           height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [kBGColor, kBG2Color],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+            // gradient: LinearGradient(
+            //   // colors: [kBGColor, kBG2Color],
+            //   begin: Alignment.topCenter,
+            //   end: Alignment.bottomCenter,
+            // ),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
@@ -56,7 +56,7 @@ class _ShowWeatherStatusViewBodyState extends State<ShowWeatherStatusViewBody> {
                         ),
                         Text(
                           '${widget.weatherModel.temp.toString()}°',
-                          style: Styles.textStyle80,
+                          style: Styles.textStyle32,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

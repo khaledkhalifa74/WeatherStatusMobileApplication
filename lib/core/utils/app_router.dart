@@ -8,7 +8,7 @@ abstract class AppRouter {
     initialLocation: kSearchView,
     routes: [
       GoRoute(
-        path: '/',
+        path: kSearchView,
         builder: (context, state) => const SearchCityView(),
       ),
     ],

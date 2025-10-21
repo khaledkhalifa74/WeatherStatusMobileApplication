@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:weather_status_app/core/utils/styles.dart';
-
 import '../utils/colors.dart';
 
-class TextFormFieldWithTitle extends StatefulWidget {
-  final String title;
+class CustomTextFormField extends StatefulWidget {
   final String? placeholder;
   final TextEditingController? controller;
   final TextInputType? inputType;
@@ -16,6 +14,7 @@ class TextFormFieldWithTitle extends StatefulWidget {
   final void Function()? onTap;
   final bool? isOptional;
   final Widget? suffix;
+  final Widget? prefix;
   final bool? obscureText;
   final void Function(String)? onChanged;
   final TextStyle? titleStyle;
@@ -23,10 +22,10 @@ class TextFormFieldWithTitle extends StatefulWidget {
   final FocusNode? focusNode;
   final int? minLines;
   final int? maxLines;
+  final void Function(String)? onFieldSubmitted;
 
-  const TextFormFieldWithTitle({
+  const CustomTextFormField({
     super.key,
-    required this.title,
     this.controller,
     this.autoFocus,
     this.placeholder,
@@ -42,14 +41,14 @@ class TextFormFieldWithTitle extends StatefulWidget {
     this.onTap,
     this.readOnly,
     this.focusNode,
-    this.minLines, this.maxLines,
+    this.minLines, this.maxLines, this.onFieldSubmitted, this.prefix,
   });
 
   @override
-  TextFormFieldWithTitleState createState() => TextFormFieldWithTitleState();
+  CustomTextFormFieldState createState() => CustomTextFormFieldState();
 }
 
-class TextFormFieldWithTitleState extends State<TextFormFieldWithTitle> {
+class CustomTextFormFieldState extends State<CustomTextFormField> {
   // late FocusNode _focusNode;
 
   @override
@@ -75,31 +74,6 @@ class TextFormFieldWithTitleState extends State<TextFormFieldWithTitle> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        widget.isOptional != null
-            ? Row(
-          children: [
-            Text(
-              widget.title,
-              style: Styles.textStyle16,
-            ),
-            const SizedBox(
-              width: 4,
-            ),
-            Text(
-              '(optional)',
-              style: Styles.textStyle16.copyWith(
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ],
-        )
-            : Text(
-          widget.title,
-          style: widget.titleStyle ?? Styles.textStyle16,
-        ),
-        const SizedBox(
-          height: 8,
-        ),
         SizedBox(
           width: MediaQuery.of(context).size.width,
           child: TextFormField(
@@ -107,6 +81,7 @@ class TextFormFieldWithTitleState extends State<TextFormFieldWithTitle> {
             minLines: widget.minLines??1,
             focusNode: widget.focusNode, // Attach the FocusNode here
             onChanged: widget.onChanged,
+            onFieldSubmitted: widget.onFieldSubmitted,
             obscureText: widget.obscureText ?? false,
             onTap: () {
               if (widget.focusNode != null) {
@@ -130,6 +105,7 @@ class TextFormFieldWithTitleState extends State<TextFormFieldWithTitle> {
             readOnly: widget.readOnly ?? false,
             maxLengthEnforcement: MaxLengthEnforcement.enforced,
             keyboardType: widget.inputType,
+            cursorColor: kHintColor,
             autofocus: widget.autoFocus ?? false,
             validator: widget.validator ??
                     (data) {
@@ -142,37 +118,41 @@ class TextFormFieldWithTitleState extends State<TextFormFieldWithTitle> {
             decoration: InputDecoration(
               filled: true,
               suffixIcon: widget.suffix,
+              prefixIcon: widget.prefix,
               hintText: widget.placeholder,
               hintStyle: Styles.textStyle16.copyWith(
                 fontWeight: FontWeight.w400,
-                color: kTextFieldHintColor,
+                color: kHintColor,
               ),
-              focusedBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(12)),
                   borderSide: BorderSide(
                     color: kBorderColor,
                     width: 1,
                     style: BorderStyle.solid,
                   )),
-              border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
+              border: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
                   borderSide: BorderSide(
-                      width: 1, color: kBorderColor, style: BorderStyle.solid)),
-              enabledBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                      width: 1,
+                      color: kBorderColor,
+                      style: BorderStyle.solid,
+                  )),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
                   borderSide: BorderSide(
                       width: 1, color: kBorderColor, style: BorderStyle.solid)),
               disabledBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
                   borderSide: BorderSide(
                       width: 1,
                       color: Colors.transparent,
                       style: BorderStyle.solid)),
               errorBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
                   borderSide: BorderSide(
                       width: 1, color: kErrorColor, style: BorderStyle.solid)),
-              fillColor: kWhiteColor,
+              fillColor: kFilledColor,
               contentPadding: const EdgeInsets.all(16),
             ),
           ),

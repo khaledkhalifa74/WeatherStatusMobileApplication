@@ -7,7 +7,7 @@ import 'package:weather_status_app/core/utils/styles.dart';
 import 'package:weather_status_app/core/widgets/custom_alert.dart';
 import 'package:weather_status_app/core/widgets/custom_button.dart';
 import 'package:weather_status_app/core/widgets/custom_loading_indicator.dart';
-import 'package:weather_status_app/core/widgets/text_form_field_with_title.dart';
+import 'package:weather_status_app/core/widgets/custom_text_form_field.dart';
 import 'package:weather_status_app/features/weather_status/presentation/manager/weather_status_cubit.dart';
 import 'package:weather_status_app/features/weather_status/presentation/manager/weather_status_states.dart';
 import 'package:weather_status_app/features/weather_status/presentation/views/show_weather_status_view.dart';
