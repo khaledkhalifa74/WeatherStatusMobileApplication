@@ -7,34 +7,31 @@ class WeatherStatusCubit extends Cubit<WeatherStatusState> {
 
   static WeatherStatusCubit get(context) => BlocProvider.of(context);
   final GetWeatherStatusRepo getWeatherStatusRepo;
-  bool? isFavourite = false;
 
   Future<void> getWeatherStatus({ required String cityName}) async{
     emit(StartLoadingGetWeatherState());
     var result = await getWeatherStatusRepo.getWeatherStatus(cityName: cityName);
     result.fold((failure) {
       emit(GetWeatherFailureState(errorMessage: failure.message));
-      emit(StopLoadingGetWeatherState());
       },
           (weatherModel) {
-      emit(StopLoadingGetWeatherState());
       emit(GetWeatherSuccessState(weatherModel));
       },
     );
+    emit(StopLoadingGetWeatherState());
   }
 
   Future<void> getFavoriteCities() async{
     emit(StartLoadingGetFavoriteCitiesState());
     var result = await getWeatherStatusRepo.getFavoriteCities();
     result.fold((failure) {
-      emit(GetWeatherFailureState(errorMessage: failure.message));
-      emit(StopLoadingGetFavoriteCitiesState());
+      emit(GetFavoriteCitiesFailureState(errorMessage: failure.message));
     },
           (cities) {
-        emit(StopLoadingGetFavoriteCitiesState());
         emit(GetFavoriteCitiesSuccessState(cities));
       },
     );
+    emit(StopLoadingGetFavoriteCitiesState());
   }
 
   Future<void> addCityToFavorites({required String cityName}) async{
@@ -42,27 +39,30 @@ class WeatherStatusCubit extends Cubit<WeatherStatusState> {
     var result = await getWeatherStatusRepo.addCityToFavorites(cityName: cityName);
     result.fold((failure) {
       emit(AddCityToFavoriteFailureState(errorMessage: failure.message));
-      emit(StopLoadingAddCityToFavoriteState());
       },
           (isAdded) {
-        emit(StopLoadingAddCityToFavoriteState());
+        isAdded = !isAdded;
         emit(AddCityToFavoriteSuccessState(isAdded));
       },
     );
+    emit(StopLoadingAddCityToFavoriteState());
   }
 
   Future<void> isFavorite({required String cityName}) async{
     emit(StartLoadingCheckIsFavoriteState());
     var result = await getWeatherStatusRepo.isFavorite(cityName: cityName);
     result.fold((failure) {
-      emit(AddCityToFavoriteFailureState(errorMessage: failure.message));
-      emit(StopLoadingCheckIsFavoriteState());
+      emit(CheckIsFavoriteFailureState(errorMessage: failure.message));
     },
           (isFavorite) {
-        emit(StopLoadingCheckIsFavoriteState());
         emit(CheckIsFavoriteSuccessState(isFavorite));
       },
     );
+    emit(StopLoadingCheckIsFavoriteState());
   }
 
+  Future<void> getData({required String cityName})async{
+    await getWeatherStatus(cityName: cityName);
+    await isFavorite(cityName: cityName);
+  }
 }

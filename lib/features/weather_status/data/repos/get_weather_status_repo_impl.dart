@@ -40,7 +40,7 @@ class GetWeatherStatusRepoImpl extends GetWeatherStatusRepo {
   @override
   Future<Either<Failure, List<String>>> getFavoriteCities() async{
     List<String> cities;
-    cities = favoriteCitiesLocalDataSource.getFavoriteCities();
+    cities = await favoriteCitiesLocalDataSource.getFavoriteCities();
     if(cities.isNotEmpty){
       return right(cities);
     }
@@ -50,7 +50,7 @@ class GetWeatherStatusRepoImpl extends GetWeatherStatusRepo {
   @override
   Future<Either<Failure, bool>> isFavorite({required String cityName}) async{
     var isFavorite = favoriteCitiesLocalDataSource.isFavorite(cityName: cityName);
-    if(isFavorite){
+    if(await isFavorite){
       return right(true);
     }
     return left(LocalDBFailure(message: 'There is something error, please try later'));

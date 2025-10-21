@@ -12,7 +12,7 @@ class ShowWeatherStatusView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) {
-        return WeatherStatusCubit(getIt.get<GetWeatherStatusRepoImpl>())..getWeatherStatus(
+        return WeatherStatusCubit(getIt.get<GetWeatherStatusRepoImpl>())..getData(
           cityName: cityName,
         );
       },

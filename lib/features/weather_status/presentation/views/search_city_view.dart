@@ -12,7 +12,7 @@ class SearchCityView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) {
-        return WeatherStatusCubit(getIt.get<GetWeatherStatusRepoImpl>());
+        return WeatherStatusCubit(getIt.get<GetWeatherStatusRepoImpl>())..getFavoriteCities();
       },
       child: Scaffold(
         resizeToAvoidBottomInset: true,

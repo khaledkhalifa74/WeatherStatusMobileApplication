@@ -34,11 +34,20 @@ class _ShowWeatherStatusViewBodyState extends State<ShowWeatherStatusViewBody> {
         }
       },
       builder: (context, state) {
-        if(state is StartLoadingGetWeatherState){
+        final cubit = WeatherStatusCubit.get(context);
+        if(state is StartLoadingGetWeatherState || state is StartLoadingCheckIsFavoriteState){
           isLoading = true;
-        }else{
+        }else if (state is StopLoadingCheckIsFavoriteState){
           isLoading = false;
         }
+
+        if(state is CheckIsFavoriteSuccessState){
+          isFavorite = state.isFavorite;
+        }
+        if(state is AddCityToFavoriteSuccessState){
+          isFavorite = state.isAdded;
+        }
+        isFavorite = false;
         return Skeletonizer(
           textBoneBorderRadius: TextBoneBorderRadius(BorderRadius.circular(4)),
           enabled: isLoading,
@@ -61,9 +70,7 @@ class _ShowWeatherStatusViewBodyState extends State<ShowWeatherStatusViewBody> {
                     CustomWeatherHeader(
                       isFavorite: isFavorite,
                       onFavoritePressed: (){
-                        setState(() {
-                          isFavorite = !isFavorite;
-                        });
+                        cubit.addCityToFavorites(cityName: widget.cityName);
                       },
                       cityName: weatherModel?.cityName ?? 'Not found',
                     ),
