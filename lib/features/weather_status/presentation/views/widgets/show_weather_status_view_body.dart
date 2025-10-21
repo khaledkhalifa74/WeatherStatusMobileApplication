@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_status_app/core/utils/colors.dart';
 import 'package:weather_status_app/core/utils/styles.dart';
 import 'package:weather_status_app/core/widgets/custom_app_bar.dart';
 import 'package:weather_status_app/features/weather_status/data/models/weather_model.dart';
