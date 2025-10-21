@@ -34,9 +34,9 @@ class CurrentWeatherStats extends StatelessWidget {
             child: Column(
               children: [
                 Icon(
-                  getWeatherIcon(temp,),
+                  getWeatherIcon(temp),
                   size: 120,
-                 color: kHintColor,
+                  color: kHintColor,
                 ),
                 const SizedBox(height: 16),
                 Text(

@@ -7,8 +7,8 @@ class WeatherModel {
   final String weatherCondition;
   final int humidity;
   final double windSpeed;
-  final double visibility; // Added visibility
-  final List<ForecastDay> forecast; // Added 5-day forecast
+  final double visibility;
+  final List<ForecastDay> forecast;
   final DateTime date;
 
   WeatherModel({

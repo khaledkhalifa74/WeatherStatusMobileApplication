@@ -1,3 +1,3 @@
 String getFormattedDate(DateTime date) {
-  return '${date.day}/${date.month}';
+  return '${date.day}-${date.month}-${date.year}';
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:weather_status_app/core/utils/functions/get_day_name.dart';
+import 'package:weather_status_app/core/utils/functions/get_formatted_date.dart';
 import 'package:weather_status_app/core/utils/styles.dart';
 import 'package:weather_status_app/features/weather_status/data/models/weather_model.dart';
 import 'package:weather_status_app/features/weather_status/presentation/views/widgets/day_forecast_item.dart';
@@ -16,24 +18,24 @@ class DaysForecast extends StatelessWidget {
         children: [
           // 5-Day Forecast
            Text(
-            '5-Day Forecast',
+            'Days Forecast',
             style: Styles.textStyle24,
           ),
           const SizedBox(height: 16),
-          DayForecastItem(
-            day: 'Monday',
-            maxTemp: '26',
-            minTemp: '18',
-          ),
-          DayForecastItem(
-            day: 'Friday',
-            maxTemp: '29',
-            minTemp: '16',
-          ),
-          DayForecastItem(
-            day: 'Saturday',
-            maxTemp: '30',
-            minTemp: '18',
+          ListView.builder(
+            padding: EdgeInsets.zero,
+            itemCount: weatherModel?.forecast.length,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              final dayForecast = weatherModel?.forecast[index];
+              return DayForecastItem(
+                day: getDayName(dayForecast!.date),
+                dateTime: getFormattedDate(dayForecast.date),
+                maxTemp: dayForecast.maxTemp.toString(),
+                minTemp: dayForecast.minTemp.toString(),
+              );
+            },
           )
         ],
       ),

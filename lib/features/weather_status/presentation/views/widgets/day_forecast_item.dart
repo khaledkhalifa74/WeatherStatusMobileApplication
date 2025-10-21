@@ -6,7 +6,8 @@ class DayForecastItem extends StatelessWidget {
   final String day;
   final String maxTemp;
   final String minTemp;
-  const DayForecastItem({super.key, required this.day, required this.maxTemp, required this.minTemp});
+  final String dateTime;
+  const DayForecastItem({super.key, required this.day, required this.maxTemp, required this.minTemp, required this.dateTime});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +25,18 @@ class DayForecastItem extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            flex: 2,
-            child: Text(
-              day,
-              style: Styles.textStyle16,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  day,
+                  style: Styles.textStyle16,
+                ),
+                Text(
+                    dateTime,
+                  style: Styles.textStyle16,
+                )
+              ],
             ),
           ),
           Expanded(
