@@ -38,6 +38,15 @@ class GetWeatherStatusRepoImpl extends GetWeatherStatusRepo {
     }
 
   @override
+  Future<Either<Failure, bool>> removeCityFromFavorites({required String cityName})async {
+    var isRemoved = await favoriteCitiesLocalDataSource.removeCityFromFavorites(cityName: cityName);
+    if(isRemoved){
+      return right(true);
+    }
+    return Left(LocalDBFailure(message: 'Cannot remove this city from favorites'));
+  }
+
+  @override
   Future<Either<Failure, List<String>>> getFavoriteCities() async{
     List<String> cities;
     cities = await favoriteCitiesLocalDataSource.getFavoriteCities();

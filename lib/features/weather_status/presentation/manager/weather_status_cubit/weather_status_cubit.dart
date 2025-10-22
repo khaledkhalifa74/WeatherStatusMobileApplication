@@ -50,6 +50,22 @@ class WeatherStatusCubit extends Cubit<WeatherStatusState> {
     emit(StopLoadingAddCityToFavoriteState());
   }
 
+  Future<void> removeCityFromFavorites({required String cityName}) async{
+    emit(StartLoadingRemoveCityFromFavoriteState());
+    var result = await getWeatherStatusRepo.removeCityFromFavorites(cityName: cityName);
+    result.fold((failure) {
+      emit(RemoveCityFromFavoriteFailureState(errorMessage: failure.message));
+      isFavorite = false;
+    },
+          (isRemoved) {
+        isFavorite = !isRemoved;
+        emit(RemoveCityFromFavoriteSuccessState(!isRemoved));
+      },
+    );
+    emit(StopLoadingRemoveCityFromFavoriteState());
+  }
+
+
   Future<void> isFavoriteCity({required String cityName}) async{
     emit(StartLoadingCheckIsFavoriteState());
     var result = await getWeatherStatusRepo.isFavorite(cityName: cityName);

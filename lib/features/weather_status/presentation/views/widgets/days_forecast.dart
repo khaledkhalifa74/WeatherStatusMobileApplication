@@ -7,39 +7,42 @@ import 'package:weather_status_app/features/weather_status/presentation/views/wi
 
 class DaysForecast extends StatelessWidget {
   final WeatherModel? weatherModel;
-  const DaysForecast({super.key, this.weatherModel});
+  const DaysForecast({super.key, required this.weatherModel});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: weatherModel!.forecast.isEmpty
-          ? const SizedBox()
-          : Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-           Text(
-            'Days Forecast',
-            style: Styles.textStyle24,
-          ),
-          const SizedBox(height: 16),
-          ListView.builder(
-            padding: EdgeInsets.zero,
-            itemCount: weatherModel?.forecast.length,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              final dayForecast = weatherModel?.forecast[index];
-              return DayForecastItem(
-                day: getDayName(dayForecast!.date),
-                dateTime: getFormattedDate(dayForecast.date),
-                maxTemp: dayForecast.maxTemp.toString(),
-                minTemp: dayForecast.minTemp.toString(),
-              );
-            },
+      child:
+          weatherModel != null
+              ? weatherModel!.forecast.isEmpty
+              ? const SizedBox()
+              : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Days Forecast',
+                style: Styles.textStyle24,
+              ),
+              const SizedBox(height: 16),
+              ListView.builder(
+                padding: EdgeInsets.zero,
+                itemCount: weatherModel!.forecast.length,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final dayForecast = weatherModel!.forecast[index];
+                  return DayForecastItem(
+                    day: getDayName(dayForecast.date),
+                    dateTime: getFormattedDate(dayForecast.date),
+                    maxTemp: dayForecast.maxTemp.toString(),
+                    minTemp: dayForecast.minTemp.toString(),
+                  );
+                },
+              )
+            ],
           )
-        ],
-      ),
+              : const SizedBox()
     );
   }
 }

@@ -42,6 +42,18 @@ class AddCityToFavoriteFailureState extends WeatherStatusState {
   AddCityToFavoriteFailureState({required this.errorMessage});
 }
 
+// remove city from favorites
+class StartLoadingRemoveCityFromFavoriteState extends WeatherStatusState {}
+class StopLoadingRemoveCityFromFavoriteState extends WeatherStatusState {}
+class RemoveCityFromFavoriteSuccessState extends WeatherStatusState {
+  final bool isRemoved;
+  RemoveCityFromFavoriteSuccessState(this.isRemoved);
+}
+class RemoveCityFromFavoriteFailureState extends WeatherStatusState {
+  final String errorMessage;
+  RemoveCityFromFavoriteFailureState({required this.errorMessage});
+}
+
 // check isFavorite
 class StartLoadingCheckIsFavoriteState extends WeatherStatusState {}
 class StopLoadingCheckIsFavoriteState extends WeatherStatusState {}

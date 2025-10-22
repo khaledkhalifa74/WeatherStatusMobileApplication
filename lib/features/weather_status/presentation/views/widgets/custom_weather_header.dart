@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:weather_status_app/core/utils/app_router.dart';
 import 'package:weather_status_app/core/utils/colors.dart';
 
 class CustomWeatherHeader extends StatelessWidget {
@@ -15,7 +17,7 @@ class CustomWeatherHeader extends StatelessWidget {
       children: [
         IconButton(
           icon: const Icon(Icons.arrow_back_rounded, color: kWhiteColor, size: 28),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => context.pushReplacement(AppRouter.kSearchView),
         ),
         IconButton(
           icon: Icon(

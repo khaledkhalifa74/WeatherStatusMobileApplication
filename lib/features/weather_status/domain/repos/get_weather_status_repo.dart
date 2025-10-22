@@ -10,4 +10,6 @@ abstract class GetWeatherStatusRepo{
   Future<Either< Failure,bool>> addCityToFavorites({required String cityName});
 
   Future<Either< Failure,bool>> isFavorite({required String cityName});
+
+  Future<Either< Failure,bool>> removeCityFromFavorites({required String cityName});
 }

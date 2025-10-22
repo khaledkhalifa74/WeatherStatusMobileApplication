@@ -61,7 +61,11 @@ class _ShowWeatherStatusViewBodyState extends State<ShowWeatherStatusViewBody> {
                     CustomWeatherHeader(
                       isFavorite: cubit.isFavorite,
                       onFavoritePressed: (){
-                        cubit.addCityToFavorites(cityName: widget.cityName);
+                        if(cubit.isFavorite == false){
+                          cubit.addCityToFavorites(cityName: widget.cityName);
+                        }else{
+                          cubit.removeCityFromFavorites(cityName: widget.cityName);
+                        }
                       },
                       cityName: weatherModel?.cityName ?? 'Not found',
                     ),
